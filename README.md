@@ -11,5 +11,4 @@ RxSwift + 업비트 실시간 조회 구현
 ### 개발스펙
 - 사용 라이브러리: RxSwift, RxCocoa, RxMoya
 - 아키텍처: **MVVM**? VIP? RIBs?
-- 
 
