@@ -11,6 +11,6 @@ RxSwift + 업비트 실시간 조회 구현
     - 참고앱: 주식, 업비트, 코인원, 고팍스
 
 ### 개발스펙
-- 사용 라이브러리: RxSwift, RxCocoa, RxMoya
-- 아키텍처: **MVVM**? VIP? RIBs?
+- 사용 라이브러리: RxSwift, RxCocoa, RxMoya, ReactorKit
+- 아키텍처: MVVM? VIP? RIBs?
 
