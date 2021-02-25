@@ -10,6 +10,7 @@ RxSwift + 업비트 실시간 조회 구현
 
 ### 화면기획
 - 참고앱: 주식, 업비트, 코인원, 고팍스
+<img src="https://user-images.githubusercontent.com/20768506/109131381-1bcab000-7796-11eb-88d8-65fa2bbbf9ed.PNG" width="50%">
 ![주식일별](https://user-images.githubusercontent.com/20768506/109131381-1bcab000-7796-11eb-88d8-65fa2bbbf9ed.PNG){: width="50%" height="50%"}
 ![주식체결](https://user-images.githubusercontent.com/20768506/109131401-208f6400-7796-11eb-9b42-cc429c3476b4.PNG){: width="50%" height="50%"}
 ![주식](https://user-images.githubusercontent.com/20768506/109131407-2127fa80-7796-11eb-8dc6-3c7d3880f3e2.PNG){: width="50%" height="50%"}
