@@ -12,6 +12,9 @@ target 'RxUpbit' do
   
   pod 'RxAlamofire'
   pod 'RxStarscream'
+  
+  pod 'Then'
+  pod 'SwiftyBeaver'
 
   target 'RxUpbitTests' do
     inherit! :search_paths

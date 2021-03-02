@@ -14,6 +14,8 @@ PODS:
   - RxSwift (4.5.0)
   - SnapKit (5.0.1)
   - Starscream (3.1.1)
+  - SwiftyBeaver (1.9.3)
+  - Then (2.7.0)
 
 DEPENDENCIES:
   - RxAlamofire
@@ -21,6 +23,8 @@ DEPENDENCIES:
   - RxStarscream
   - RxSwift
   - SnapKit
+  - SwiftyBeaver
+  - Then
 
 SPEC REPOS:
   trunk:
@@ -31,6 +35,8 @@ SPEC REPOS:
     - RxSwift
     - SnapKit
     - Starscream
+    - SwiftyBeaver
+    - Then
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
@@ -40,7 +46,9 @@ SPEC CHECKSUMS:
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
+  SwiftyBeaver: 2e8acd6fc90c6d0a27055867a290794926d57c02
+  Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 062dff5229c3fb0d633380c821cdad8371b1d672
+PODFILE CHECKSUM: a255d453be450282d7807db5efb8344686d6949a
 
 COCOAPODS: 1.10.1
