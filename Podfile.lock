@@ -1,5 +1,7 @@
 PODS:
   - Alamofire (4.9.1)
+  - ReactorKit (1.2.1):
+    - RxSwift (>= 4.0.0)
   - RxAlamofire (4.4.1):
     - RxAlamofire/Core (= 4.4.1)
   - RxAlamofire/Core (4.4.1):
@@ -18,6 +20,7 @@ PODS:
   - Then (2.7.0)
 
 DEPENDENCIES:
+  - ReactorKit
   - RxAlamofire
   - RxCocoa
   - RxStarscream
@@ -29,6 +32,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - ReactorKit
     - RxAlamofire
     - RxCocoa
     - RxStarscream
@@ -40,6 +44,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  ReactorKit: 8be57f0527ad1ac2963cd5c338274a46a01e57a3
   RxAlamofire: ed65f451f5a9a59419b0b9e705043dc01410edd9
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxStarscream: aa79e742c87e9bcdff218a1ebb59638f5174589e
@@ -49,6 +54,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 2e8acd6fc90c6d0a27055867a290794926d57c02
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: a255d453be450282d7807db5efb8344686d6949a
+PODFILE CHECKSUM: caf16b8b21b64fd6b21c0ff6364efaa65ba88a9b
 
 COCOAPODS: 1.10.1
