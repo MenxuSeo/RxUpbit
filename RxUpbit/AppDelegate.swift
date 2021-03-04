@@ -44,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     func initLog() {
         let console = ConsoleDestination()
+        log.addDestination(console)
     }
 }
 
