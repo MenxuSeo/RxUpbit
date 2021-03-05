@@ -9,17 +9,19 @@ import UIKit
 import Then
 import RxSwift
 import RxCocoa
-import Starscream
 import SnapKit
+import ReactorKit
 
-class ViewController: UIViewController {
-  let bag = DisposeBag()
+class CoinViewController: UIViewController, View {
+  var disposeBag = DisposeBag()
   let cellIndentifier = "CoinCell"
   
   let dummy = [["BTC", "57000", "-0.71%", "1.198억"]]
   let tableView = UITableView().then {
     $0.backgroundColor = .systemRed
   }
+  
+  
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -27,6 +29,10 @@ class ViewController: UIViewController {
 //        run()
     setupUI()
     bindTableView()
+  }
+  
+  func bind(reactor: MainViewReactor) {
+    
   }
   
   func setupUI() {
@@ -40,20 +46,8 @@ class ViewController: UIViewController {
   }
   
   func bindTableView() {
-    log.verbose("binding")
-    // 1. 데이터를 Observable sequence로 변환
-    // 2. tableView/collectionView와 바인딩
-//    rx.items(dataSource:protocol<RxTableViewDataSourceType, UITableViewDataSource>)
-//    rx.items(cellIdentifier:String)
-//    rx.items(cellIdentifier:String:Cell.Type:_:)
-//    rx.items(_:_:)
-    
-    // 엘리멘츠를 옵저버블 타입으로 생성해줌
+
     let dymmyOb = Observable.of(dummy)
-//    let data = Observable<[String]>.just(dummy)
-    
-    // ERROR! must register a nib or a class for the identifier or connect a prototype cell in a storyboard'
-  
     
     dymmyOb.bind(to: tableView.rx.items(cellIdentifier: cellIndentifier, cellType: CoinCell.self)) { (indexPath, element, cell) in
       log.verbose("hi")
@@ -63,12 +57,13 @@ class ViewController: UIViewController {
       cell.fluctuation.text = element[2]
       cell.transactionAmount.text = element[3]
 
-    }.disposed(by: bag)
+    }.disposed(by: disposeBag)
   }
   
 
 }
 
+// MARK: cell
 class CoinCell: UITableViewCell {
   // 코인명
   let nameLabel = UILabel().then {

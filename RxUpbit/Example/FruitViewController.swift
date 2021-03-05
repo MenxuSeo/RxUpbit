@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ReactorKit
 import RxSwift
 import RxCocoa
 
@@ -57,11 +58,8 @@ class ViewController: UIViewController {
     
   // MARK: Configures
   func configureUI() {
-    view.backgroundColor = .systemBackground
-    
-    
     view.addSubview(stack)
-    stack.translatesAutoresizingMaskIntoConstraints = false
+    
     stack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     stack.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
       
