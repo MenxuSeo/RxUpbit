@@ -40,24 +40,6 @@ class UpbitAPI {
   // https://api.upbit.com/v1/market/all
   let baseURL = URL(string: "https://api.upbit.com/v1/")!
   
-  func send<T: Codable>(apiRequest: APIRequest) -> Observable<T> {
-    return Observable<T>.create { observer in
-      let request = apiRequest.request(with: self.baseURL)
-      let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-        do {
-          let model: T = try JSONDecoder().decode(T.self, from: data ?? Data())
-          observer.onNext(model)
-        } catch let error {
-          observer.onError(error)
-        }
-        observer.onCompleted()
-      }
-      task.resume()
-      
-      return Disposables.create { task.cancel() }
-    }
-  }
-  
   func get<T: Codable>(apiRequest: APIRequest) -> Observable<T> {
     return Observable<T>.create { observer in
       let request = apiRequest.request(with: self.baseURL)
@@ -78,4 +60,16 @@ class UpbitAPI {
       return Disposables.create { dataRequest.cancel() }
     }
   }
+}
+
+
+class CoinRequest: APIRequest {
+  var metohd: HTTPMethod = .get
+  var path = "market/all"
+  var parameters = [String : String]()
+  
+  init(name: String) {
+    parameters["name"] = name
+  }
+  
 }

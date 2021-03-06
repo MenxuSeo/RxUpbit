@@ -14,6 +14,9 @@ import ReactorKit
 
 class CoinViewController: UIViewController, View {
   var disposeBag = DisposeBag()
+  let upbitAPI = UpbitAPI()
+  var testUrl = "https://en.wikipedia.org/w/api.php?action=opensearch&limit=10&namespace=0&format=json&search=Apple"
+  
   let cellIndentifier = "CoinCell"
   
   let dummy = [["BTC", "57000", "-0.71%", "1.198억"]]
@@ -21,46 +24,70 @@ class CoinViewController: UIViewController, View {
     $0.backgroundColor = .systemRed
   }
   
+  let searchBar = UISearchBar().then {
+    $0.backgroundColor = .systemBlue
+    $0.barStyle = .default
+    $0.sizeToFit()
+  }
   
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
-//        run()
+    self.reactor = CoinReactor()
+    
     setupUI()
-    bindTableView()
   }
   
-  func bind(reactor: MainViewReactor) {
+  func bind(reactor: CoinReactor) {
+    searchBar.rx.text
+      .debounce(2, scheduler: MainScheduler.instance)
+      .map { Reactor.Action.getData($0) }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
     
+    reactor.state.map { $0.repos }
+      .bind(to: tableView.rx.items(cellIdentifier: cellIndentifier)) { indexPath, repo, cell in
+        cell.textLabel?.text = repo
+      }
+      .disposed(by: disposeBag)
+    
+    tableView.rx.itemSelected
+      .subscribe(onNext: { [weak self, weak reactor] indexPath in
+        guard let `self` = self else { return }
+        self.view.endEditing(true)
+        self.tableView.deselectRow(at: indexPath, animated: false)
+        guard let page = reactor?.currentState.urls[indexPath.row] else { return }
+        
+        if let url = URL(string: "https://en.wikipedia.org/wiki/\(page)") {
+          UIApplication.shared.open(url)
+        }
+      })
+      .disposed(by: disposeBag)
   }
   
   func setupUI() {
+//    searchBar.then {
+//      self.view.addSubview($0)
+//      $0.snp.makeConstraints {
+//        $0.top.equalTo(view.safeAreaLayoutGuide)
+//      }
+//    }
+    
     tableView.then {
       self.view.addSubview($0)
       $0.register(CoinCell.self, forCellReuseIdentifier: cellIndentifier)
+      $0.tableHeaderView = searchBar
       $0.snp.makeConstraints {
         $0.edges.equalTo(view.safeAreaLayoutGuide)
+//        $0.leading.bottom.trailing.equalTo(view.safeAreaLayoutGuide)
+//        $0.top.equalTo(searchBar.snp.bottom)
       }
     }
   }
+}
+
+extension Observable: Then {
   
-  func bindTableView() {
-
-    let dymmyOb = Observable.of(dummy)
-    
-    dymmyOb.bind(to: tableView.rx.items(cellIdentifier: cellIndentifier, cellType: CoinCell.self)) { (indexPath, element, cell) in
-      log.verbose("hi")
-
-      cell.nameLabel.text = element[0]
-      cell.priceLabel.text = element[1]
-      cell.fluctuation.text = element[2]
-      cell.transactionAmount.text = element[3]
-
-    }.disposed(by: disposeBag)
-  }
-  
-
 }
 
 // MARK: cell
