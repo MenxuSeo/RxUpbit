@@ -66,28 +66,15 @@ class CoinViewController: UIViewController, View {
   }
   
   func setupUI() {
-//    searchBar.then {
-//      self.view.addSubview($0)
-//      $0.snp.makeConstraints {
-//        $0.top.equalTo(view.safeAreaLayoutGuide)
-//      }
-//    }
-    
     tableView.then {
       self.view.addSubview($0)
       $0.register(CoinCell.self, forCellReuseIdentifier: cellIndentifier)
       $0.tableHeaderView = searchBar
       $0.snp.makeConstraints {
         $0.edges.equalTo(view.safeAreaLayoutGuide)
-//        $0.leading.bottom.trailing.equalTo(view.safeAreaLayoutGuide)
-//        $0.top.equalTo(searchBar.snp.bottom)
       }
     }
   }
-}
-
-extension Observable: Then {
-  
 }
 
 // MARK: cell
