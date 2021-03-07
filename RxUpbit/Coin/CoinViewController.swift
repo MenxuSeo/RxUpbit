@@ -25,11 +25,10 @@ class CoinViewController: UIViewController, View {
   }
   
   let searchBar = UISearchBar().then {
-    $0.backgroundColor = .systemBlue
-    $0.barStyle = .default
+    $0.barStyle = .black
     $0.sizeToFit()
+    $0.placeholder = "코인명/심볼 검색"
   }
-  
 
   override func viewDidLoad() {
     super.viewDidLoad()
