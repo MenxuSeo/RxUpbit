@@ -46,8 +46,8 @@ class CoinViewController: UIViewController, View {
       .disposed(by: disposeBag)
     
     reactor.state.map { $0.repos }
-      .bind(to: tableView.rx.items(cellIdentifier: cellIndentifier)) { indexPath, repo, cell in
-        cell.textLabel?.text = repo
+      .bind(to: tableView.rx.items(cellIdentifier: cellIndentifier, cellType: CoinCell.self)) { indexPath, repo, cell in
+        cell.nameLabel.text = repo
       }
       .disposed(by: disposeBag)
     
