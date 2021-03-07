@@ -11,6 +11,9 @@
 		AA42686125F286FF005FE098 /* UpbitAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA42686025F286FF005FE098 /* UpbitAPI.swift */; };
 		AA42686225F286FF005FE098 /* UpbitAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA42686025F286FF005FE098 /* UpbitAPI.swift */; };
 		AA42686325F286FF005FE098 /* UpbitAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA42686025F286FF005FE098 /* UpbitAPI.swift */; };
+		AA4268C925F506CE005FE098 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4268C825F506CE005FE098 /* CoinModel.swift */; };
+		AA4268CA25F506CE005FE098 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4268C825F506CE005FE098 /* CoinModel.swift */; };
+		AA4268CB25F506CE005FE098 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4268C825F506CE005FE098 /* CoinModel.swift */; };
 		AA68C13825F136D4002E514C /* CoinReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA68C13725F136D4002E514C /* CoinReactor.swift */; };
 		AA68C13925F136D4002E514C /* CoinReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA68C13725F136D4002E514C /* CoinReactor.swift */; };
 		AA68C13A25F136D4002E514C /* CoinReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA68C13725F136D4002E514C /* CoinReactor.swift */; };
@@ -58,6 +61,7 @@
 		7FB0A176FB2DFE76D67CDF84 /* Pods-RxUpbit-RxUpbitUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxUpbit-RxUpbitUITests.debug.xcconfig"; path = "Target Support Files/Pods-RxUpbit-RxUpbitUITests/Pods-RxUpbit-RxUpbitUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A78F9C63E29FFF5AF9989DA /* Pods-RxUpbitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxUpbitTests.debug.xcconfig"; path = "Target Support Files/Pods-RxUpbitTests/Pods-RxUpbitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AA42686025F286FF005FE098 /* UpbitAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpbitAPI.swift; sourceTree = "<group>"; };
+		AA4268C825F506CE005FE098 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
 		AA68C13725F136D4002E514C /* CoinReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinReactor.swift; sourceTree = "<group>"; };
 		AA68C15425F13B2C002E514C /* FruitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitViewController.swift; sourceTree = "<group>"; };
 		AA68C15B25F13B58002E514C /* FruitReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitReactor.swift; sourceTree = "<group>"; };
@@ -145,6 +149,7 @@
 			children = (
 				AAFF83E825DC0CF5002EAC77 /* CoinViewController.swift */,
 				AA68C13725F136D4002E514C /* CoinReactor.swift */,
+				AA4268C825F506CE005FE098 /* CoinModel.swift */,
 			);
 			path = Coin;
 			sourceTree = "<group>";
@@ -460,6 +465,7 @@
 				AAFF83E725DC0CF5002EAC77 /* SceneDelegate.swift in Sources */,
 				AA68C13825F136D4002E514C /* CoinReactor.swift in Sources */,
 				AA68C15525F13B2C002E514C /* FruitViewController.swift in Sources */,
+				AA4268C925F506CE005FE098 /* CoinModel.swift in Sources */,
 				AA42686125F286FF005FE098 /* UpbitAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -472,6 +478,7 @@
 				AAFF83FC25DC0CF7002EAC77 /* RxUpbitTests.swift in Sources */,
 				AA68C13925F136D4002E514C /* CoinReactor.swift in Sources */,
 				AA68C15625F13B2C002E514C /* FruitViewController.swift in Sources */,
+				AA4268CA25F506CE005FE098 /* CoinModel.swift in Sources */,
 				AA68C15D25F13B58002E514C /* FruitReactor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,6 +491,7 @@
 				AAFF840725DC0CF7002EAC77 /* RxUpbitUITests.swift in Sources */,
 				AA68C13A25F136D4002E514C /* CoinReactor.swift in Sources */,
 				AA68C15725F13B2C002E514C /* FruitViewController.swift in Sources */,
+				AA4268CB25F506CE005FE098 /* CoinModel.swift in Sources */,
 				AA68C15E25F13B58002E514C /* FruitReactor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
