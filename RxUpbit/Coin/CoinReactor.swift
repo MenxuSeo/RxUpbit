@@ -40,13 +40,6 @@ final class CoinReactor: Reactor {
         self.search(query: query, page: 1)
           .map { Mutation.setRepos($0, $1)}
       ])
-//    case let .follow:
-//      return Observable.concat([
-//        Observable.just(Mutation.setFollowing(true)),
-//        self.get(query1: "market", query2: "all")
-//          .map { Mutation.setRepos($0, $1)}
-//
-//      ])
     default: ()
       //
     }
