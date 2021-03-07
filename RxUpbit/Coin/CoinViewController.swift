@@ -19,7 +19,6 @@ class CoinViewController: UIViewController, View {
   
   let cellIndentifier = "CoinCell"
   
-  let dummy = [["BTC", "57000", "-0.71%", "1.198억"]]
   let tableView = UITableView().then {
     $0.backgroundColor = .systemRed
   }
