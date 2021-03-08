@@ -21,13 +21,23 @@ class RequestManager {
   }()
   
   class func request(method: HTTPMethod = .get, url: URLConvertible) -> Observable<[Coin]> {
-    return RequestManager.shared.rx.json(method, url)
+    log.verbose("request")
+    return RequestManager.shared.rx.data(method, url)
       .retry(2)
       .observeOn(ConcurrentDispatchQueueScheduler(queue: .global()))
+//      .mapArray(type: Coin.self)
       .map { json -> ([Coin]) in
-        guard let items = json as? [Coin] else { return [] }
-        log.debug("items: \(items)")
-        return items
+        log.verbose("coin")
+        let decoder = JSONDecoder()
+        var coins: [Coin] = []
+        do {
+          coins = try decoder.decode([Coin].self, from: json)
+          log.verbose(coins)
+        } catch {
+          log.error(error.localizedDescription)
+        }
+        
+        return coins
       }
       .do(onError: { error in
         if case let .some(.httpRequestFailed(response, _)) = error as? RxCocoaURLError, response.statusCode == 403 {

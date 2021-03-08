@@ -43,9 +43,9 @@ class CoinViewController: UIViewController, View {
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
     
-    reactor.state.map { $0.repos }
-      .bind(to: tableView.rx.items(cellIdentifier: cellIndentifier, cellType: CoinCell.self)) { indexPath, repo, cell in
-        cell.nameLabel.text = repo
+    reactor.state.map { [$0] }
+      .bind(to: tableView.rx.items(cellIdentifier: cellIndentifier, cellType: CoinCell.self)) { indexPath, coins, cell in
+        cell.nameLabel.text = "\(coins.coins.count)"
       }
       .disposed(by: disposeBag)
     
@@ -54,7 +54,9 @@ class CoinViewController: UIViewController, View {
         guard let `self` = self else { return }
         self.view.endEditing(true)
         self.tableView.deselectRow(at: indexPath, animated: false)
-        guard let page = reactor?.currentState.urls[indexPath.row] else { return }
+        guard let page = reactor?.currentState.urls[indexPath.row] else {
+          log.verbose("빠졌다")
+          return }
         
         if let url = URL(string: "https://en.wikipedia.org/wiki/\(page)") {
           UIApplication.shared.open(url)

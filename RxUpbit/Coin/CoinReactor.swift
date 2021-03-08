@@ -21,14 +21,13 @@ final class CoinReactor: Reactor {
   // represent state changes
   enum Mutation {
     case setQuery(String?)
-    case setRepos([String], [String])
+    case setCoins([Coin])
   }
-  
   
   // represents the current view state
   struct State {
     var query: String?
-    var repos : [String] = []
+    var coins: [Coin] = []
     var urls: [String] = []
   }
   
@@ -38,7 +37,7 @@ final class CoinReactor: Reactor {
       return Observable.concat([
         Observable.just(Mutation.setQuery(query)),
         self.search(query: query, page: 1)
-          .map { Mutation.setRepos($0, $1)}
+          .map { Mutation.setCoins($0) }
       ])
     default: ()
       //
@@ -50,25 +49,43 @@ final class CoinReactor: Reactor {
     switch mutation {
     case let .setQuery(query):
       newState.query = query
-    case let .setRepos(repos, nextPage):
-      newState.repos = repos
-      newState.urls = nextPage
+    case let .setCoins(coins):
+      newState.coins = coins
     }
     return newState
   }
   
   private func url(for query: String?, page: Int) -> URL? {
-    guard let query = query, !query.isEmpty else { return nil }
+    let url = URL(string: "https://api.upbit.com/v1/market/all")
+    guard let query = query, !query.isEmpty else {
+      return url }
     
-    return URL(string: "https://api.upbit.com/v1/market/all")
+    return url
     
 //    return URL(string: "https://api.upbit.com/v1/\(query1)/\(query2)")
   }
   
   private func search(query: String?, page: Int) -> Observable<[Coin]> {
     let emptyResult: [Coin] = []
-    guard let url = self.url(for: query, page: page) else { return .just(emptyResult) }
+    log.verbose("start search")
+    guard let url = self.url(for: query, page: page) else {
+      log.verbose("url 획득 실패")
+      return .just(emptyResult) }
 
     return RequestManager.request(url: url)
+//      .map { json -> (Coin) in
+//        log.verbose("getData: \(json)")
+//
+//        guard let jsonData = dict.jsonToString().data(using: .utf8) else {
+//          log.verbose("2222")
+//          return emptyResult
+//        }
+//        guard let model = try? JSONDecoder().decode([Coin].self, from: jsonData) else {
+//          log.verbose("json: \(json)")
+//          return emptyResult
+//        }
+//        log.verbose("item: \(model)")
+//        return emptyResult
+//      }
   }
 }
