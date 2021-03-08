@@ -14,8 +14,8 @@ import ReactorKit
 
 class CoinViewController: UIViewController, View {
   var disposeBag = DisposeBag()
-  let upbitAPI = UpbitAPI()
-  var testUrl = "https://en.wikipedia.org/w/api.php?action=opensearch&limit=10&namespace=0&format=json&search=Apple"
+  
+  var testUrl = "https://api.upbit.com/v1/market/all"
   
   let cellIndentifier = "CoinCell"
   

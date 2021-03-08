@@ -10,6 +10,12 @@ struct Coin: Codable {
   let koreanName: String
   let market: String
   
+  init() {
+    englishName = ""
+    koreanName = ""
+    market = ""
+  }
+  
   enum CodingKeys: String, CodingKey {
     case englishName = "english_name"
     case koreanName = "korean_name"

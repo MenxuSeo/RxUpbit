@@ -60,29 +60,15 @@ final class CoinReactor: Reactor {
   private func url(for query: String?, page: Int) -> URL? {
     guard let query = query, !query.isEmpty else { return nil }
     
-    return URL(string: "https://en.wikipedia.org/w/api.php?action=opensearch&limit=10&namespace=0&format=json&search=\(query)")
+    return URL(string: "https://api.upbit.com/v1/market/all")
     
 //    return URL(string: "https://api.upbit.com/v1/\(query1)/\(query2)")
   }
   
-  
-  
-  private func search(query: String?, page: Int) -> Observable<(repos: [String], nextPage: [String])> {
-    let emptyResult: ([String], [String]) = ([], [])
+  private func search(query: String?, page: Int) -> Observable<[Coin]> {
+    let emptyResult: [Coin] = []
     guard let url = self.url(for: query, page: page) else { return .just(emptyResult) }
 
-    return RxAlamofire.requestJSON(.get, url)
-      .map { json -> ([String], [String]) in
-        let data = json.1 as! NSArray
-        let textArr = data[1] as! [String]
-        let urlArr = data[3] as! [String]
-        return (textArr, urlArr)
-      }
-      .do(onError: { error in
-        if case let .some(.httpRequestFailed(response, _)) = error as? RxCocoaURLError, response.statusCode == 403 {
-          log.verbose("⚠️ GitHub API rate limit exceeded. Wait for 60 seconds and try again.")
-        }
-      })
-      .catchErrorJustReturn(emptyResult)
+    return RequestManager.request(url: url)
   }
 }

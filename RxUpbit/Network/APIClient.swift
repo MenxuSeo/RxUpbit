@@ -36,9 +36,19 @@ extension APIRequest {
   }
 }
 
-class UpbitAPI {
+class CoinRequest: APIRequest {
+  var metohd: HTTPMethod = .get
+  var path: String = "/market/all"
+  var parameters: [String : String] = [:]
+  
+  init(name: String) {
+    parameters["name"] = name
+  }
+}
+
+class APIClient {
   // https://api.upbit.com/v1/market/all
-  let baseURL = URL(string: "https://api.upbit.com/v1/")!
+  let baseURL = URL(string: "https://api.upbit.com/v1")!
   
   func get<T: Codable>(apiRequest: APIRequest) -> Observable<T> {
     return Observable<T>.create { observer in
@@ -60,16 +70,4 @@ class UpbitAPI {
       return Disposables.create { dataRequest.cancel() }
     }
   }
-}
-
-
-class CoinRequest: APIRequest {
-  var metohd: HTTPMethod = .get
-  var path = "market/all"
-  var parameters = [String : String]()
-  
-  init(name: String) {
-    parameters["name"] = name
-  }
-  
 }
