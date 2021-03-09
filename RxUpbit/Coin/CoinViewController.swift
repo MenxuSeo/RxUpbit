@@ -44,8 +44,9 @@ class CoinViewController: UIViewController, View {
       .disposed(by: disposeBag)
     
     reactor.state.map { [$0] }
-      .bind(to: tableView.rx.items(cellIdentifier: cellIndentifier, cellType: CoinCell.self)) { indexPath, coins, cell in
-        cell.nameLabel.text = "\(coins.coins.count)"
+      .bind(to: tableView.rx.items(cellIdentifier: cellIndentifier, cellType: CoinCell.self)) { indexPath, coin, cell in
+        log.verbose("res: \(coin)")
+        cell.nameLabel.text = "\(coin.coins.count)"
       }
       .disposed(by: disposeBag)
     
@@ -75,7 +76,7 @@ class CoinViewController: UIViewController, View {
       }
     }
   }
-}
+}f
 
 // MARK: cell
 class CoinCell: UITableViewCell {
