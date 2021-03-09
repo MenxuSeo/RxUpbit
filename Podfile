@@ -13,6 +13,7 @@ target 'RxUpbit' do
   pod 'RxAlamofire'
   pod 'RxStarscream'
   pod 'ReactorKit'
+  pod 'RxDataSources'
   
   pod 'Then'
   pod 'SwiftyBeaver'

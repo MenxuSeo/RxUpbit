@@ -8,19 +8,21 @@
 import UIKit
 import Then
 import RxSwift
+import RxDataSources
 import RxCocoa
 import SnapKit
 import ReactorKit
 
 class CoinViewController: UIViewController, View {
   var disposeBag = DisposeBag()
+  var sections = PublishSubject<[CoinSection]>()
   
   var testUrl = "https://api.upbit.com/v1/market/all"
   
   let cellIndentifier = "CoinCell"
   
   let tableView = UITableView().then {
-    $0.backgroundColor = .systemRed
+    $0.backgroundColor = .systemTeal
   }
   
   let searchBar = UISearchBar().then {
@@ -37,33 +39,44 @@ class CoinViewController: UIViewController, View {
   }
   
   func bind(reactor: CoinReactor) {
+    
+    
     searchBar.rx.text
       .debounce(2, scheduler: MainScheduler.instance)
       .map { Reactor.Action.getData($0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
     
+//    let dataSource = self.dataSource()
+//    sections.asObserver()
+//      .bind(to: tableView.rx.items(dataSource: dataSource))
+//      .disposed(by: disposeBag)
+    
+    
     reactor.state.map { [$0] }
       .bind(to: tableView.rx.items(cellIdentifier: cellIndentifier, cellType: CoinCell.self)) { indexPath, coin, cell in
-        log.verbose("res: \(coin)")
-        cell.nameLabel.text = "\(coin.coins.count)"
+        log.verbose("res: \(coin.coins.count)")
+//        cell.setView(koreanName: "1", englishName: "2")
+        guard indexPath < coin.coins.count else { return }
+        cell.nameLabel.text = "\(coin.coins[indexPath].koreanName)"
+        cell.priceLabel.text = "\(coin.coins[indexPath].market)"
       }
       .disposed(by: disposeBag)
     
-    tableView.rx.itemSelected
-      .subscribe(onNext: { [weak self, weak reactor] indexPath in
-        guard let `self` = self else { return }
-        self.view.endEditing(true)
-        self.tableView.deselectRow(at: indexPath, animated: false)
-        guard let page = reactor?.currentState.urls[indexPath.row] else {
-          log.verbose("빠졌다")
-          return }
-        
-        if let url = URL(string: "https://en.wikipedia.org/wiki/\(page)") {
-          UIApplication.shared.open(url)
-        }
-      })
-      .disposed(by: disposeBag)
+//    tableView.rx.itemSelected
+//      .subscribe(onNext: { [weak self, weak reactor] indexPath in
+//        guard let `self` = self else { return }
+//        self.view.endEditing(true)
+//        self.tableView.deselectRow(at: indexPath, animated: false)
+//        guard let page = reactor?.currentState.urls[indexPath.row] else {
+//          log.verbose("빠졌다")
+//          return }
+//
+//        if let url = URL(string: "https://en.wikipedia.org/wiki/\(page)") {
+//          UIApplication.shared.open(url)
+//        }
+//      })
+//      .disposed(by: disposeBag)
   }
   
   func setupUI() {
@@ -76,54 +89,20 @@ class CoinViewController: UIViewController, View {
       }
     }
   }
-}f
-
-// MARK: cell
-class CoinCell: UITableViewCell {
-  // 코인명
-  let nameLabel = UILabel().then {
-    $0.backgroundColor = .systemRed
-  }
-  // 현재가
-  let priceLabel = UILabel().then {
-    $0.backgroundColor = .systemYellow
-  }
-  // 등락률
-  let fluctuation  = UILabel().then {
-    $0.backgroundColor = .systemGreen
-  }
-  // 거래대금
-  let transactionAmount  = UILabel().then {
-    $0.backgroundColor = .systemTeal
-  }
-  
-  override init(style: UITableViewCell.CellStyle = .default, reuseIdentifier: String? = "CoinCell") {
-    super.init(style: style, reuseIdentifier: reuseIdentifier)
-    configure()
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-  func configure() {
-    let _ = UIStackView().then {
-      self.contentView.addSubview($0)
-      $0.backgroundColor = .systemPurple
-      $0.axis = .horizontal
-      $0.spacing = 5
-      $0.distribution = .fillEqually
-      $0.snp.makeConstraints {
-        $0.edges.equalTo(contentView)
-        $0.height.equalTo(50)
-      }
-      $0.addArrangedSubview(nameLabel)
-      $0.addArrangedSubview(priceLabel)
-      $0.addArrangedSubview(fluctuation)
-      $0.addArrangedSubview(transactionAmount)
-    }
-  
-//    nameLabel.snp.makeConstraints()
-  }
-  
 }
+
+extension CoinViewController {
+  func dataSource() -> RxTableViewSectionedReloadDataSource<CoinSection> {
+    return RxTableViewSectionedReloadDataSource<CoinSection>(configureCell: {
+      (dataSource, tableView, indexPath, model) -> CoinCell in
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: "CoinCell", for: indexPath) as? CoinCell else {
+        log.verbose("탈락")
+        return CoinCell() }
+      cell.backgroundColor = .brown
+      log.verbose("야")
+      cell.setView(koreanName: model.koreanName, englishName: model.englishName)
+      return cell
+    })
+  }
+}
+
