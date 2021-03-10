@@ -33,7 +33,7 @@ class CoinCell: UITableViewCell {
   
   override init(style: UITableViewCell.CellStyle = .default, reuseIdentifier: String? = "CoinCell") {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    configure()
+    setup()
   }
   
   required init?(coder: NSCoder) {
@@ -55,10 +55,9 @@ class CoinCell: UITableViewCell {
     self.disposeBag = DisposeBag()
   }
   
-  func configure() {
-    let _ = UIStackView().then {
+  func setup() {
+    let stackView = UIStackView().then {
       self.contentView.addSubview($0)
-//      $0.backgroundColor = .systemPurple
       $0.axis = .horizontal
       $0.spacing = 5
       $0.distribution = .fillEqually
@@ -71,6 +70,11 @@ class CoinCell: UITableViewCell {
       $0.addArrangedSubview(fluctuation)
       $0.addArrangedSubview(transactionAmount)
     }
+  }
+  
+  func configure(item: Coin) {
+    self.nameLabel.text = item.koreanName
+   
   }
   
   func setView(koreanName: String, englishName: String) {
