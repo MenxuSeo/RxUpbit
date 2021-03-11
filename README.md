@@ -15,6 +15,8 @@ RxSwift + 업비트 실시간 조회 구현
 
 <img src="https://user-images.githubusercontent.com/20768506/109131414-22f1be00-7796-11eb-94ca-0aabedee4388.PNG" width="33%"><img src="https://user-images.githubusercontent.com/20768506/109131428-24bb8180-7796-11eb-9454-e8664708b6af.PNG" width="33%"><img src="https://user-images.githubusercontent.com/20768506/109131429-25541800-7796-11eb-976e-7716e3564d09.PNG" width="33%">
 ---
+- 실시간 시세
+
 <img src="https://user-images.githubusercontent.com/20768506/109131411-21c09100-7796-11eb-8e61-03dec4c66fe6.PNG" width="33%"><img src="https://user-images.githubusercontent.com/20768506/109131426-2422eb00-7796-11eb-999d-7107d25aa36f.PNG" width="33%"><img src="https://user-images.githubusercontent.com/20768506/109131431-25ecae80-7796-11eb-99f3-327c318dc8aa.PNG" width="33%">
 
 
