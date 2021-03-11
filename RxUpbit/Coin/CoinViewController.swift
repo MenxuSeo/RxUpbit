@@ -52,14 +52,16 @@ class CoinViewController: UIViewController, View {
 //      .bind(to: tableView.rx.items(dataSource: dataSource))
 //      .disposed(by: disposeBag)
     
-    
-    reactor.state.map { [$0] }
+    // state
+    reactor.state.map { $0.coins }
       .bind(to: tableView.rx.items(cellIdentifier: cellIndentifier, cellType: CoinCell.self)) { indexPath, coin, cell in
-        log.verbose("res: \(coin.coins.count)")
+        log.verbose("indexPath: \(indexPath)")
+        log.verbose("coin.coins.count: \(coin)")
+        log.verbose("cell: \(cell)")
 //        cell.setView(koreanName: "1", englishName: "2")
-        guard indexPath < coin.coins.count else { return }
-        cell.nameLabel.text = "\(coin.coins[indexPath].koreanName)"
-        cell.priceLabel.text = "\(coin.coins[indexPath].market)"
+//        guard indexPath < coin.coins.count else { return }
+        cell.nameLabel.text = "\(coin.koreanName)"
+        cell.priceLabel.text = "\(coin.market)"
       }
       .disposed(by: disposeBag)
     
