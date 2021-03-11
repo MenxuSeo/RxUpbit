@@ -22,6 +22,11 @@ RxSwift + 업비트 실시간 조회 구현
 
 
 ### 개발스펙
-- 사용 라이브러리: RxSwift, RxCocoa, RxMoya, ReactorKit, RxStarscream?
-- 아키텍처: MVVM? VIP? RIBs?
+- 사용 라이브러리: RxSwift, RxCocoa, RxMoya, ReactorKit
+- 아키텍처: Reactor
 
+### 개발순서
+1. ~3/4: 아키텍처 선택(reactor) + 화면 구성(snp)
+2. ~3/11: 화면 구현(2p)
+3. ~3/18: rest api
+4. ~3/25: 소켓 통신 구현
