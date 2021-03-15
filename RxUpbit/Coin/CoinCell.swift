@@ -56,7 +56,7 @@ class CoinCell: UITableViewCell {
   }
   
   func setup() {
-    let stackView = UIStackView().then {
+    let _ = UIStackView().then {
       self.contentView.addSubview($0)
       $0.axis = .horizontal
       $0.spacing = 5
