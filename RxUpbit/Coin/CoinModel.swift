@@ -4,6 +4,7 @@
 //
 //  Created by seo on 2021/03/07.
 //
+import RxDataSources
 
 struct Coin: Codable {
   let englishName: String
@@ -20,5 +21,16 @@ struct Coin: Codable {
     case englishName = "english_name"
     case koreanName = "korean_name"
     case market
+  }
+}
+
+struct CoinSection {
+  var items: [Coin]
+}
+
+extension CoinSection: SectionModelType {
+  init(original: CoinSection, items: [Coin]) {
+    self = original
+    self.items = items
   }
 }

@@ -25,14 +25,12 @@ class RequestManager {
     return RequestManager.shared.rx.data(method, url)
       .retry(2)
       .observeOn(ConcurrentDispatchQueueScheduler(queue: .global()))
-//      .mapArray(type: Coin.self)
       .map { json -> ([Coin]) in
-        log.verbose("coin")
         let decoder = JSONDecoder()
         var coins: [Coin] = []
         do {
           coins = try decoder.decode([Coin].self, from: json)
-          log.verbose(coins)
+          log.verbose("result: \(coins)")
         } catch {
           log.error(error.localizedDescription)
         }
