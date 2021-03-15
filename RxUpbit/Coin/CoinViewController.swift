@@ -15,9 +15,16 @@ import ReactorKit
 
 class CoinViewController: UIViewController, View {
   var disposeBag = DisposeBag()
-  var sections = PublishSubject<[CoinSection]>()
   
-  var testUrl = "https://api.upbit.com/v1/market/all"
+  let dataSource = RxTableViewSectionedReloadDataSource<CoinSection>(configureCell: { dataSource, tableView, indexPath, item in
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: "CoinCell") as? CoinCell else {
+      log.verbose("coincell error")
+      return CoinCell()
+    }
+    cell.configure(item: item)
+    
+    return cell
+  })
   
   let cellIndentifier = "CoinCell"
   
@@ -39,21 +46,18 @@ class CoinViewController: UIViewController, View {
   }
   
   func bind(reactor: CoinReactor) {
-    
-    
     searchBar.rx.text
       .debounce(2, scheduler: MainScheduler.instance)
       .map { Reactor.Action.getData($0) }
+      // ActionSubject<Action>
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
     
-//    let dataSource = self.dataSource()
-//    sections.asObserver()
-//      .bind(to: tableView.rx.items(dataSource: dataSource))
-//      .disposed(by: disposeBag)
-    
     // state
     reactor.state.map { $0.coins }
+      // Coin 구조체에 Equatible 구현
+      .distinctUntilChanged(<#T##comparer: ([Coin], [Coin]) throws -> Bool##([Coin], [Coin]) throws -> Bool#>)
+//      .bind(to: self.tableView.rx.items(dataSource: dataSource))
       .bind(to: tableView.rx.items(cellIdentifier: cellIndentifier, cellType: CoinCell.self)) { indexPath, coin, cell in
         log.verbose("indexPath: \(indexPath)")
         log.verbose("coin.coins.count: \(coin)")
@@ -65,19 +69,8 @@ class CoinViewController: UIViewController, View {
       }
       .disposed(by: disposeBag)
     
-//    tableView.rx.itemSelected
-//      .subscribe(onNext: { [weak self, weak reactor] indexPath in
-//        guard let `self` = self else { return }
-//        self.view.endEditing(true)
-//        self.tableView.deselectRow(at: indexPath, animated: false)
-//        guard let page = reactor?.currentState.urls[indexPath.row] else {
-//          log.verbose("빠졌다")
-//          return }
-//
-//        if let url = URL(string: "https://en.wikipedia.org/wiki/\(page)") {
-//          UIApplication.shared.open(url)
-//        }
-//      })
+//    reactor.state.map { $0.coins }
+//      .bind(to: self.tableView.rx.items(dataSource: dataSource))
 //      .disposed(by: disposeBag)
   }
   
@@ -93,18 +86,20 @@ class CoinViewController: UIViewController, View {
   }
 }
 
-extension CoinViewController {
-  func dataSource() -> RxTableViewSectionedReloadDataSource<CoinSection> {
-    return RxTableViewSectionedReloadDataSource<CoinSection>(configureCell: {
-      (dataSource, tableView, indexPath, model) -> CoinCell in
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: "CoinCell", for: indexPath) as? CoinCell else {
-        log.verbose("탈락")
-        return CoinCell() }
-      cell.backgroundColor = .brown
-      log.verbose("야")
-      cell.setView(koreanName: model.koreanName, englishName: model.englishName)
-      return cell
-    })
-  }
-}
+//extension CoinViewController {
+//  func dataSource() -> RxTableViewSectionedReloadDataSource<CoinSection> {
+//    log.verbose("콜")
+//    return RxTableViewSectionedReloadDataSource<CoinSection>(configureCell: {
+//      (dataSource, tableView, indexPath, model) -> CoinCell in
+//      log.verbose("dataSource: \(dataSource)")
+//      log.verbose("model: \(model)")
+//      log.verbose("indexPath: \(indexPath)")
+//      guard let cell = tableView.dequeueReusableCell(withIdentifier: "CoinCell", for: indexPath) as? CoinCell else {
+//        log.verbose("탈락")
+//        return CoinCell() }
+//      cell.setView(koreanName: model.koreanName, englishName: model.englishName)
+//      return cell
+//    })
+//  }
+//}
 
