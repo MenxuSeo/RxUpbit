@@ -9,18 +9,16 @@
 /* Begin PBXBuildFile section */
 		3371556995911C131508943D /* Pods_RxUpbit_RxUpbitUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D27580D8DA3A9C0AEFFFF333 /* Pods_RxUpbit_RxUpbitUITests.framework */; };
 		AA22E27725F7C7D500FC5ED5 /* CoinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA22E27625F7C7D500FC5ED5 /* CoinCell.swift */; };
-		AA42686125F286FF005FE098 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA42686025F286FF005FE098 /* APIClient.swift */; };
-		AA42686225F286FF005FE098 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA42686025F286FF005FE098 /* APIClient.swift */; };
-		AA42686325F286FF005FE098 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA42686025F286FF005FE098 /* APIClient.swift */; };
 		AA4268C925F506CE005FE098 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4268C825F506CE005FE098 /* CoinModel.swift */; };
 		AA4268CA25F506CE005FE098 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4268C825F506CE005FE098 /* CoinModel.swift */; };
 		AA4268CB25F506CE005FE098 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4268C825F506CE005FE098 /* CoinModel.swift */; };
-		AA42692325F52D82005FE098 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA42692225F52D82005FE098 /* RequestManager.swift */; };
-		AA42692425F52D82005FE098 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA42692225F52D82005FE098 /* RequestManager.swift */; };
-		AA42692525F52D82005FE098 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA42692225F52D82005FE098 /* RequestManager.swift */; };
+		AA42692325F52D82005FE098 /* NetwrokManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA42692225F52D82005FE098 /* NetwrokManager.swift */; };
+		AA42692425F52D82005FE098 /* NetwrokManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA42692225F52D82005FE098 /* NetwrokManager.swift */; };
+		AA42692525F52D82005FE098 /* NetwrokManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA42692225F52D82005FE098 /* NetwrokManager.swift */; };
 		AA42692B25F53027005FE098 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA42692A25F53027005FE098 /* Array+.swift */; };
 		AA42692C25F53027005FE098 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA42692A25F53027005FE098 /* Array+.swift */; };
 		AA42692D25F53027005FE098 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA42692A25F53027005FE098 /* Array+.swift */; };
+		AA5F6E14260B71B60027E98D /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5F6E13260B71B60027E98D /* WebSocketManager.swift */; };
 		AA68C13825F136D4002E514C /* CoinReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA68C13725F136D4002E514C /* CoinReactor.swift */; };
 		AA68C13925F136D4002E514C /* CoinReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA68C13725F136D4002E514C /* CoinReactor.swift */; };
 		AA68C13A25F136D4002E514C /* CoinReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA68C13725F136D4002E514C /* CoinReactor.swift */; };
@@ -68,10 +66,10 @@
 		7FB0A176FB2DFE76D67CDF84 /* Pods-RxUpbit-RxUpbitUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxUpbit-RxUpbitUITests.debug.xcconfig"; path = "Target Support Files/Pods-RxUpbit-RxUpbitUITests/Pods-RxUpbit-RxUpbitUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A78F9C63E29FFF5AF9989DA /* Pods-RxUpbitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxUpbitTests.debug.xcconfig"; path = "Target Support Files/Pods-RxUpbitTests/Pods-RxUpbitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AA22E27625F7C7D500FC5ED5 /* CoinCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinCell.swift; sourceTree = "<group>"; };
-		AA42686025F286FF005FE098 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		AA4268C825F506CE005FE098 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
-		AA42692225F52D82005FE098 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
+		AA42692225F52D82005FE098 /* NetwrokManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetwrokManager.swift; sourceTree = "<group>"; };
 		AA42692A25F53027005FE098 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
+		AA5F6E13260B71B60027E98D /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketManager.swift; sourceTree = "<group>"; };
 		AA68C13725F136D4002E514C /* CoinReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinReactor.swift; sourceTree = "<group>"; };
 		AA68C15425F13B2C002E514C /* FruitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitViewController.swift; sourceTree = "<group>"; };
 		AA68C15B25F13B58002E514C /* FruitReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitReactor.swift; sourceTree = "<group>"; };
@@ -149,8 +147,8 @@
 		AA42685C25F286ED005FE098 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				AA42686025F286FF005FE098 /* APIClient.swift */,
-				AA42692225F52D82005FE098 /* RequestManager.swift */,
+				AA42692225F52D82005FE098 /* NetwrokManager.swift */,
+				AA5F6E13260B71B60027E98D /* WebSocketManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -485,12 +483,12 @@
 				AA68C15C25F13B58002E514C /* FruitReactor.swift in Sources */,
 				AAFF83E525DC0CF5002EAC77 /* AppDelegate.swift in Sources */,
 				AAFF83E725DC0CF5002EAC77 /* SceneDelegate.swift in Sources */,
-				AA42692325F52D82005FE098 /* RequestManager.swift in Sources */,
+				AA42692325F52D82005FE098 /* NetwrokManager.swift in Sources */,
 				AA68C13825F136D4002E514C /* CoinReactor.swift in Sources */,
 				AA68C15525F13B2C002E514C /* FruitViewController.swift in Sources */,
 				AA4268C925F506CE005FE098 /* CoinModel.swift in Sources */,
 				AA22E27725F7C7D500FC5ED5 /* CoinCell.swift in Sources */,
-				AA42686125F286FF005FE098 /* APIClient.swift in Sources */,
+				AA5F6E14260B71B60027E98D /* WebSocketManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,12 +496,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA42686225F286FF005FE098 /* APIClient.swift in Sources */,
 				AA42692C25F53027005FE098 /* Array+.swift in Sources */,
 				AAFF83FC25DC0CF7002EAC77 /* RxUpbitTests.swift in Sources */,
 				AA68C13925F136D4002E514C /* CoinReactor.swift in Sources */,
 				AA68C15625F13B2C002E514C /* FruitViewController.swift in Sources */,
-				AA42692425F52D82005FE098 /* RequestManager.swift in Sources */,
+				AA42692425F52D82005FE098 /* NetwrokManager.swift in Sources */,
 				AA4268CA25F506CE005FE098 /* CoinModel.swift in Sources */,
 				AA68C15D25F13B58002E514C /* FruitReactor.swift in Sources */,
 			);
@@ -513,12 +510,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA42686325F286FF005FE098 /* APIClient.swift in Sources */,
 				AA42692D25F53027005FE098 /* Array+.swift in Sources */,
 				AAFF840725DC0CF7002EAC77 /* RxUpbitUITests.swift in Sources */,
 				AA68C13A25F136D4002E514C /* CoinReactor.swift in Sources */,
 				AA68C15725F13B2C002E514C /* FruitViewController.swift in Sources */,
-				AA42692525F52D82005FE098 /* RequestManager.swift in Sources */,
+				AA42692525F52D82005FE098 /* NetwrokManager.swift in Sources */,
 				AA4268CB25F506CE005FE098 /* CoinModel.swift in Sources */,
 				AA68C15E25F13B58002E514C /* FruitReactor.swift in Sources */,
 			);

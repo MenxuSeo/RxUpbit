@@ -36,13 +36,14 @@ final class CoinReactor: Reactor {
   func mutate(action: CoinReactor.Action) -> Observable<CoinReactor.Mutation> {
     switch action {
     case let .getData(query):
+      self.search(networkType: .wss)
       return Observable.concat([
         Observable.just(Mutation.setQuery(query)),
-        self.search(query: query, page: 1)
-          .map { Mutation.setCoins($0) }
+        
+//          .map { Mutation.setCoins($0) }
       ])
     default: ()
-      //
+
     }
   }
   
@@ -58,37 +59,31 @@ final class CoinReactor: Reactor {
     return newState
   }
   
-  private func url(for query: String?, page: Int) -> URL? {
-    let url = URL(string: "https://api.upbit.com/v1/market/all")
-    guard let query = query, !query.isEmpty else {
-      return url }
+  private func url(networkType: NetworkType) -> URL? {
+    var url: URL?
+    switch networkType {
+    case .https:
+      url = URL(string: "https://api.upbit.com/v1/market/all")
+    case .wss:
+      url = URL(string: "wss://api.upbit.com/websocket/v1")
+    default:
+      url = nil
+    }
     
     return url
-    
-//    return URL(string: "https://api.upbit.com/v1/\(query1)/\(query2)")
   }
   
-  private func search(query: String?, page: Int) -> Observable<[Coin]> {
+  private func search(networkType: NetworkType) -> Observable<[Coin]> {
     let emptyResult: [Coin] = []
-    log.verbose("start search")
-    guard let url = self.url(for: query, page: page) else {
+    guard let url = self.url(networkType: networkType) else {
       log.verbose("url 획득 실패")
-      return .just(emptyResult) }
+      return .just(emptyResult)
+    }
 
-    return RequestManager.request(url: url)
-//      .map { json -> (Coin) in
-//        log.verbose("getData: \(json)")
-//
-//        guard let jsonData = dict.jsonToString().data(using: .utf8) else {
-//          log.verbose("2222")
-//          return emptyResult
-//        }
-//        guard let model = try? JSONDecoder().decode([Coin].self, from: jsonData) else {
-//          log.verbose("json: \(json)")
-//          return emptyResult
-//        }
-//        log.verbose("item: \(model)")
-//        return emptyResult
-//      }
+    return NetworkManager.request(url: url)
+  }
+  
+  private func ticker() {
+//    let emptyResult:
   }
 }

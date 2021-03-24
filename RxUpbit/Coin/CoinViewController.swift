@@ -56,22 +56,16 @@ class CoinViewController: UIViewController, View {
     // state
     reactor.state.map { $0.coins }
       // Coin 구조체에 Equatible 구현
-      .distinctUntilChanged(<#T##comparer: ([Coin], [Coin]) throws -> Bool##([Coin], [Coin]) throws -> Bool#>)
+//      .distinctUntilChanged(<#T##comparer: ([Coin], [Coin]) throws -> Bool##([Coin], [Coin]) throws -> Bool#>)
 //      .bind(to: self.tableView.rx.items(dataSource: dataSource))
       .bind(to: tableView.rx.items(cellIdentifier: cellIndentifier, cellType: CoinCell.self)) { indexPath, coin, cell in
         log.verbose("indexPath: \(indexPath)")
         log.verbose("coin.coins.count: \(coin)")
         log.verbose("cell: \(cell)")
-//        cell.setView(koreanName: "1", englishName: "2")
-//        guard indexPath < coin.coins.count else { return }
         cell.nameLabel.text = "\(coin.koreanName)"
         cell.priceLabel.text = "\(coin.market)"
       }
       .disposed(by: disposeBag)
-    
-//    reactor.state.map { $0.coins }
-//      .bind(to: self.tableView.rx.items(dataSource: dataSource))
-//      .disposed(by: disposeBag)
   }
   
   func setupUI() {
@@ -85,21 +79,3 @@ class CoinViewController: UIViewController, View {
     }
   }
 }
-
-//extension CoinViewController {
-//  func dataSource() -> RxTableViewSectionedReloadDataSource<CoinSection> {
-//    log.verbose("콜")
-//    return RxTableViewSectionedReloadDataSource<CoinSection>(configureCell: {
-//      (dataSource, tableView, indexPath, model) -> CoinCell in
-//      log.verbose("dataSource: \(dataSource)")
-//      log.verbose("model: \(model)")
-//      log.verbose("indexPath: \(indexPath)")
-//      guard let cell = tableView.dequeueReusableCell(withIdentifier: "CoinCell", for: indexPath) as? CoinCell else {
-//        log.verbose("탈락")
-//        return CoinCell() }
-//      cell.setView(koreanName: model.koreanName, englishName: model.englishName)
-//      return cell
-//    })
-//  }
-//}
-

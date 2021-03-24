@@ -11,7 +11,14 @@ import RxAlamofire
 import RxSwift
 import RxCocoa
 
-class RequestManager {
+import RxStarscream
+
+enum NetworkType {
+  case https
+  case wss
+}
+
+class NetworkManager {
   static let shared: SessionManager = {
     let config = URLSessionConfiguration.default
     config.timeoutIntervalForRequest = 3
@@ -22,7 +29,7 @@ class RequestManager {
   
   class func request(method: HTTPMethod = .get, url: URLConvertible) -> Observable<[Coin]> {
     log.verbose("request")
-    return RequestManager.shared.rx.data(method, url)
+    return NetworkManager.shared.rx.data(method, url)
       .retry(2)
       .observeOn(ConcurrentDispatchQueueScheduler(queue: .global()))
       .map { json -> ([Coin]) in
@@ -45,5 +52,14 @@ class RequestManager {
         }
       })
       .catchErrorJustReturn([])
+  }
+  
+  class func socket(url: URL) {
+    let socket = WebSocket(url: url)
+    socket.connect()
+    
+    socket.rx.response.subscribe(onNext: {
+      log.verbose("response: \($0)")
+    })
   }
 }
