@@ -7,8 +7,9 @@
 
 import Foundation
 import Starscream
+import RxSwift
 
-class WebSocketManager {
+class WebSocketManager: ReactiveCompatible {
   static let instance = WebSocketManager()
   private var websocket: WebSocket
   
@@ -26,10 +27,23 @@ class WebSocketManager {
     websocket.disconnect()
   }
   
-  func request(data: String) {
+  private func send(data: String) {
     if let data = data.data(using: .utf8) {
       websocket.write(data: data)
     }
+  }
+  
+  func request() -> Observable<CoinTicker> {
+    return WebSocketManager.instance.rx
+      .response(coinTicker:)
+  }
+}
+
+extension Reactive where Base: WebSocketManager {
+  func response(coinTicker: CoinTicker) -> Observable<CoinTicker> {
+    
+    
+    return .just(coinTicker)
   }
 }
 
@@ -38,7 +52,7 @@ extension WebSocketManager: WebSocketDelegate {
     switch event {
     case .connected(let headers):
       log.verbose("websocket is connected: \(headers)")
-      request(data: """
+      send(data: """
         [{"ticket":"test"},{"type":"ticker","codes":["KRW-BTC"]}]
       """)
     case .disconnected(let reason, let code):
@@ -47,18 +61,7 @@ extension WebSocketManager: WebSocketDelegate {
       log.verbose("Received text: \(string)")
     case .binary(let data):
       log.verbose("Received data: \(data.toCoinTicker())")
-    case .ping(_):
-      break
-    case .pong(_):
-      break
-    case .viabilityChanged(_):
-      break
-    case .reconnectSuggested(_):
-      break
-    case .cancelled:
-      ()
-    case .error(let error):
-      ()
+    default: ()
     }
   }
 }

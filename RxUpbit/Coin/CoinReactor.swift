@@ -11,8 +11,12 @@ import RxCocoa
 import RxAlamofire
 
 final class CoinReactor: Reactor {
-  var initialState: State = State(query: "", coins: [])
+  var initialState: State = State(query: "", coins: [], coinTicker: nil)
   var disposeBag = DisposeBag()
+  
+//  ~Subject는 .completed, .error의 이벤트가 발생하면 subscribe가 종료되는 반면,
+//  ~Relay는 .completed, .error를 발생하지 않고 Dispose되기 전까지 계속 작동하기 때문에 UI Event에서 사용하기 적절합니다.
+  var coinTikcer = PublishRelay<CoinTicker>()
   
   // represent user actions
   enum Action {
@@ -31,20 +35,20 @@ final class CoinReactor: Reactor {
     // 모든 프로퍼티의 변경에 state 자체가 통째로 전달됨
     var query: String?
     var coins: [Coin]
+    var coinTicker: CoinTicker?
   }
   
   // View로부터 Action을 받아서 Observable<Mutation>을 생성함
   func mutate(action: CoinReactor.Action) -> Observable<CoinReactor.Mutation> {
     switch action {
     case let .getData(query):
-      let item = self.search(networkType: .https)
-      log.verbose("item: \(item)")
+//      self.search(networkType: .https)
+      self.ticker()
       return Observable.concat([
         Observable.just(Mutation.setQuery(query)),
       ])
     default:
       log.verbose("안녕안녕:\(action)")
-
     }
   }
   
@@ -81,11 +85,12 @@ final class CoinReactor: Reactor {
       log.verbose("url 획득 실패")
       return .just(emptyResult)
     }
-    ticker()
+//    ticker()
     return NetworkManager.request(url: url)
   }
   
-  private func ticker() {
+  private func ticker() -> Observable<CoinTicker>{
     WebSocketManager.instance.connect()
+    return
   }
 }

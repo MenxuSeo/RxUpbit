@@ -19,7 +19,7 @@ enum NetworkType {
 }
 
 class NetworkManager {
-  static let shared: Session = {
+  static let instance: Session = {
     let config = URLSessionConfiguration.default
     config.timeoutIntervalForRequest = 3
     config.timeoutIntervalForResource = 3
@@ -28,7 +28,7 @@ class NetworkManager {
   }()
   
   class func request(method: HTTPMethod = .get, url: URLConvertible) -> Observable<[Coin]> {    
-    return NetworkManager.shared.rx.data(method, url)
+    return NetworkManager.instance.rx.data(method, url)
       .retry(2)
       .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
       .map { json -> ([Coin]) in
