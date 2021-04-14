@@ -46,7 +46,7 @@ extension WebSocketManager: WebSocketDelegate {
     case .text(let string):
       log.verbose("Received text: \(string)")
     case .binary(let data):
-      log.verbose("Received data: \(data.toJSON())")
+      log.verbose("Received data: \(data.toCoinTicker())")
     case .ping(_):
       break
     case .pong(_):
