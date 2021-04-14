@@ -7,14 +7,11 @@ target 'RxUpbit' do
   # Pods for RxUpbit
   pod 'RxSwift'
   pod 'RxCocoa'
-  
   pod 'SnapKit'
-  
   pod 'RxAlamofire'
-  pod 'RxStarscream'
+  pod 'Starscream'
   pod 'ReactorKit'
   pod 'RxDataSources'
-  
   pod 'Then'
   pod 'SwiftyBeaver'
 

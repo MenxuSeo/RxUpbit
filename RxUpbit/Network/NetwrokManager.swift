@@ -27,12 +27,10 @@ class NetworkManager {
     return sessionManager
   }()
   
-  class func request(method: HTTPMethod = .get, url: URLConvertible) -> Observable<[Coin]> {
-    log.verbose("[\(method)] \(url)")
-    
+  class func request(method: HTTPMethod = .get, url: URLConvertible) -> Observable<[Coin]> {    
     return NetworkManager.shared.rx.data(method, url)
       .retry(2)
-      .observeOn(ConcurrentDispatchQueueScheduler(queue: .global()))
+      .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
       .map { json -> ([Coin]) in
         log.verbose("json1: \(json)")
         let decoder = JSONDecoder()
@@ -44,16 +42,19 @@ class NetworkManager {
         } catch {
           log.error(error.localizedDescription)
         }
-        
         return coins
       }
-      .do(onError: { error in
+      .do(onNext: { item in
+        log.verbose("23123:\(item)")
+      },
+        onError: { error in
+        log.verbose("eee:\(error)")
         if case let .some(.httpRequestFailed(response, _)) = error as? RxCocoaURLError, response.statusCode == 403 {
           log.debug("⚠️ GitHub API rate limit exceeded. Wait for 60 seconds and try again.")
         } else {
           log.debug("⚠️⚠️ error: \(error)")
         }
       })
-      .catchErrorJustReturn([])
+      .catchAndReturn([])
   }
 }

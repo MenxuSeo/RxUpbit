@@ -47,7 +47,7 @@ class CoinViewController: UIViewController, View {
   
   func bind(reactor: CoinReactor) {
     searchBar.rx.text
-      .debounce(2, scheduler: MainScheduler.instance)
+//      .debounce(2, scheduler: MainScheduler.instance)
       .map { Reactor.Action.getData($0) }
       // ActionSubject<Action>
       .bind(to: reactor.action)

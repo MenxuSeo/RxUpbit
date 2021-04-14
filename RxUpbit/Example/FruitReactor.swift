@@ -36,19 +36,19 @@ class FruitReactor: Reactor {
         case .apple:
             return Observable.concat([
                 Observable.just(Mutation.setLoading(true)),
-              Observable.just(Mutation.appleLabel).delay(RxTimeInterval(0.5), scheduler: MainScheduler.instance),
+              Observable.just(Mutation.appleLabel).delay(.milliseconds(500), scheduler: MainScheduler.instance),
                 Observable.just(Mutation.setLoading(false))
             ])
         case .banana:
             return Observable.concat([
                 Observable.just(Mutation.setLoading(true)),
-                Observable.just(Mutation.bananaLabel).delay(RxTimeInterval(0.5), scheduler: MainScheduler.instance),
+                Observable.just(Mutation.bananaLabel).delay(.milliseconds(500), scheduler: MainScheduler.instance),
                 Observable.just(Mutation.setLoading(false))
             ])
         case .grapes:
             return Observable.concat([
                 Observable.just(Mutation.setLoading(true)),
-                Observable.just(Mutation.grapesLabel).delay(RxTimeInterval(0.5), scheduler: MainScheduler.instance),
+                Observable.just(Mutation.grapesLabel).delay(.milliseconds(500), scheduler: MainScheduler.instance),
                 Observable.just(Mutation.setLoading(false))
             ])
         }

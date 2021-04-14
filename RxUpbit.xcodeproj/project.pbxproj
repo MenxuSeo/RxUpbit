@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3371556995911C131508943D /* Pods_RxUpbit_RxUpbitUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D27580D8DA3A9C0AEFFFF333 /* Pods_RxUpbit_RxUpbitUITests.framework */; };
+		AA08ADEC262731BA0093C837 /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA08ADEB262731BA0093C837 /* Data+.swift */; };
 		AA22E27725F7C7D500FC5ED5 /* CoinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA22E27625F7C7D500FC5ED5 /* CoinCell.swift */; };
 		AA4268C925F506CE005FE098 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4268C825F506CE005FE098 /* CoinModel.swift */; };
 		AA4268CA25F506CE005FE098 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4268C825F506CE005FE098 /* CoinModel.swift */; };
@@ -28,7 +29,6 @@
 		AA68C15C25F13B58002E514C /* FruitReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA68C15B25F13B58002E514C /* FruitReactor.swift */; };
 		AA68C15D25F13B58002E514C /* FruitReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA68C15B25F13B58002E514C /* FruitReactor.swift */; };
 		AA68C15E25F13B58002E514C /* FruitReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA68C15B25F13B58002E514C /* FruitReactor.swift */; };
-		AA6CB09C25EE8EDE00BD1A38 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB09B25EE8EDE00BD1A38 /* SocketManager.swift */; };
 		AAFF83E525DC0CF5002EAC77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFF83E425DC0CF5002EAC77 /* AppDelegate.swift */; };
 		AAFF83E725DC0CF5002EAC77 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFF83E625DC0CF5002EAC77 /* SceneDelegate.swift */; };
 		AAFF83E925DC0CF5002EAC77 /* CoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFF83E825DC0CF5002EAC77 /* CoinViewController.swift */; };
@@ -65,6 +65,7 @@
 		7CB0F71008586EEB0E7C429D /* Pods-RxUpbit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxUpbit.debug.xcconfig"; path = "Target Support Files/Pods-RxUpbit/Pods-RxUpbit.debug.xcconfig"; sourceTree = "<group>"; };
 		7FB0A176FB2DFE76D67CDF84 /* Pods-RxUpbit-RxUpbitUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxUpbit-RxUpbitUITests.debug.xcconfig"; path = "Target Support Files/Pods-RxUpbit-RxUpbitUITests/Pods-RxUpbit-RxUpbitUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A78F9C63E29FFF5AF9989DA /* Pods-RxUpbitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxUpbitTests.debug.xcconfig"; path = "Target Support Files/Pods-RxUpbitTests/Pods-RxUpbitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AA08ADEB262731BA0093C837 /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
 		AA22E27625F7C7D500FC5ED5 /* CoinCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinCell.swift; sourceTree = "<group>"; };
 		AA4268C825F506CE005FE098 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
 		AA42692225F52D82005FE098 /* NetwrokManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetwrokManager.swift; sourceTree = "<group>"; };
@@ -73,7 +74,6 @@
 		AA68C13725F136D4002E514C /* CoinReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinReactor.swift; sourceTree = "<group>"; };
 		AA68C15425F13B2C002E514C /* FruitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitViewController.swift; sourceTree = "<group>"; };
 		AA68C15B25F13B58002E514C /* FruitReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitReactor.swift; sourceTree = "<group>"; };
-		AA6CB09B25EE8EDE00BD1A38 /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		AAFF83E125DC0CF5002EAC77 /* RxUpbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxUpbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAFF83E425DC0CF5002EAC77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAFF83E625DC0CF5002EAC77 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -157,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				AA42692A25F53027005FE098 /* Array+.swift */,
+				AA08ADEB262731BA0093C837 /* Data+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -216,7 +217,6 @@
 				AAFF83ED25DC0CF7002EAC77 /* Assets.xcassets */,
 				AAFF83EF25DC0CF7002EAC77 /* LaunchScreen.storyboard */,
 				AAFF83F225DC0CF7002EAC77 /* Info.plist */,
-				AA6CB09B25EE8EDE00BD1A38 /* SocketManager.swift */,
 			);
 			path = RxUpbit;
 			sourceTree = "<group>";
@@ -479,8 +479,8 @@
 			files = (
 				AAFF83E925DC0CF5002EAC77 /* CoinViewController.swift in Sources */,
 				AA42692B25F53027005FE098 /* Array+.swift in Sources */,
-				AA6CB09C25EE8EDE00BD1A38 /* SocketManager.swift in Sources */,
 				AA68C15C25F13B58002E514C /* FruitReactor.swift in Sources */,
+				AA08ADEC262731BA0093C837 /* Data+.swift in Sources */,
 				AAFF83E525DC0CF5002EAC77 /* AppDelegate.swift in Sources */,
 				AAFF83E725DC0CF5002EAC77 /* SceneDelegate.swift in Sources */,
 				AA42692325F52D82005FE098 /* NetwrokManager.swift in Sources */,
