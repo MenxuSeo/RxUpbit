@@ -11,7 +11,7 @@ import RxAlamofire
 import RxSwift
 import RxCocoa
 
-import RxStarscream
+import Starscream
 
 enum NetworkType {
   case https
@@ -19,23 +19,26 @@ enum NetworkType {
 }
 
 class NetworkManager {
-  static let shared: SessionManager = {
+  static let shared: Session = {
     let config = URLSessionConfiguration.default
     config.timeoutIntervalForRequest = 3
     config.timeoutIntervalForResource = 3
-    let sessionManager = SessionManager(configuration: config)
+    let sessionManager = Session(configuration: config)
     return sessionManager
   }()
   
   class func request(method: HTTPMethod = .get, url: URLConvertible) -> Observable<[Coin]> {
-    log.verbose("request")
+    log.verbose("[\(method)] \(url)")
+    
     return NetworkManager.shared.rx.data(method, url)
       .retry(2)
       .observeOn(ConcurrentDispatchQueueScheduler(queue: .global()))
       .map { json -> ([Coin]) in
+        log.verbose("json1: \(json)")
         let decoder = JSONDecoder()
         var coins: [Coin] = []
         do {
+          log.verbose("json2: \(json)")
           coins = try decoder.decode([Coin].self, from: json)
           log.verbose("result: \(coins)")
         } catch {
@@ -52,14 +55,5 @@ class NetworkManager {
         }
       })
       .catchErrorJustReturn([])
-  }
-  
-  class func socket(url: URL) {
-    let socket = WebSocket(url: url)
-    socket.connect()
-    
-    socket.rx.response.subscribe(onNext: {
-      log.verbose("response: \($0)")
-    })
   }
 }
