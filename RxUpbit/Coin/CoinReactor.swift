@@ -89,7 +89,7 @@ final class CoinReactor: Reactor {
     return NetworkManager.request(url: url)
   }
   
-  private func ticker() -> Observable<CoinTicker>{
+  private func ticker() {//} -> Observable<CoinTicker>{
     WebSocketManager.instance.connect()
     return
   }

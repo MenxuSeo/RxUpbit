@@ -33,10 +33,10 @@ class WebSocketManager: ReactiveCompatible {
     }
   }
   
-  func request() -> Observable<CoinTicker> {
-    return WebSocketManager.instance.rx
-      .response(coinTicker:)
-  }
+//  func request() -> Observable<CoinTicker> {
+//    return WebSocketManager.instance.rx
+//      .response(coinTicker:)
+//  }
 }
 
 extension Reactive where Base: WebSocketManager {
