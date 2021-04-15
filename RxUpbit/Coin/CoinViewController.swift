@@ -58,12 +58,33 @@ class CoinViewController: UIViewController, View {
       // Coin 구조체에 Equatible 구현
 //      .distinctUntilChanged(<#T##comparer: ([Coin], [Coin]) throws -> Bool##([Coin], [Coin]) throws -> Bool#>)
 //      .bind(to: self.tableView.rx.items(dataSource: dataSource))
-      .bind(to: tableView.rx.items(cellIdentifier: cellIndentifier, cellType: CoinCell.self)) { indexPath, coin, cell in
-        log.verbose("indexPath: \(indexPath)")
-        log.verbose("coin.coins.count: \(coin)")
-        log.verbose("cell: \(cell)")
-        cell.nameLabel.text = "\(coin.koreanName)"
-        cell.priceLabel.text = "\(coin.market)"
+    
+//      .bind(to: tableView.rx.items(cellIdentifier: cellIndentifier, cellType: CoinCell.self)) { indexPath, coin, cell in
+//        log.verbose("indexPath: \(indexPath)")
+//        log.verbose("coin.coins.count: \(coin)")
+//        log.verbose("cell: \(cell)")
+//        cell.nameLabel.text = "\(coin.koreanName)"
+//        cell.priceLabel.text = "\(coin.market)"
+//      }
+//      .disposed(by: disposeBag)
+    
+    reactor.state.map { $0.coinTicker }
+//      .subscribe(onNext: { [weak self] coinTicker in
+//        log.verbose(coinTicker)
+//      })
+      .bind(to: tableView.rx.items(cellIdentifier: cellIndentifier, cellType: CoinCell.self)) { indexPath, coinTicker, cell in
+        log.verbose("coinTicker: \(coinTicker)")
+        cell.nameLabel.text = "\(coinTicker.code)"
+        cell.priceLabel.text = "\(coinTicker.accTradePrice)"
+        cell.fluctuation.text = String(format: "%.3f",coinTicker.signedChangeRate)
+        
+        if coinTicker.signedChangeRate > 0 {
+          cell.priceLabel.textColor = .red
+          cell.fluctuation.textColor = .red
+        } else {
+          cell.priceLabel.textColor = .blue
+          cell.fluctuation.textColor = .blue
+        }
       }
       .disposed(by: disposeBag)
   }

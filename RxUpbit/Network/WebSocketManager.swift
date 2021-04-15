@@ -19,8 +19,9 @@ class WebSocketManager: ReactiveCompatible {
     websocket.delegate = self
   }
   
-  func connect() {
+  func connect() -> WebSocket {
     websocket.connect()
+    return websocket
   }
   
   func disconnect() {
@@ -41,8 +42,6 @@ class WebSocketManager: ReactiveCompatible {
 
 extension Reactive where Base: WebSocketManager {
   func response(coinTicker: CoinTicker) -> Observable<CoinTicker> {
-    
-    
     return .just(coinTicker)
   }
 }
@@ -52,15 +51,22 @@ extension WebSocketManager: WebSocketDelegate {
     switch event {
     case .connected(let headers):
       log.verbose("websocket is connected: \(headers)")
+      var param: [String: Any] = [:]
+      let market = ["KRW-BTC", "KRW-ETH", ]
+      param["codes"] = market
+//      str
+//        "[{"ticket":"test"},{"type":"ticker","codes":["KRW-BTC"]}]"
       send(data: """
-        [{"ticket":"test"},{"type":"ticker","codes":["KRW-BTC"]}]
+        [{"ticket":"test"},{"type":"ticker","codes":["KRW-BTC", "KRW-ETH"]}]
       """)
     case .disconnected(let reason, let code):
       log.verbose("websocket is disconnected: \(reason) with code: \(code)")
     case .text(let string):
       log.verbose("Received text: \(string)")
-    case .binary(let data):
-      log.verbose("Received data: \(data.toCoinTicker())")
+//    case .binary(let data):
+//      let coinTicker = data.toCoinTicker()
+//      log.verbose("Received data: \(coinTicker)")
+//      response(coinTicker: coinTicker)
     default: ()
     }
   }

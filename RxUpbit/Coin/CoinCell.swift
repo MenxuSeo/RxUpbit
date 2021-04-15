@@ -11,22 +11,22 @@ import RxSwift
 class CoinCell: UITableViewCell {
   var disposeBag = DisposeBag()
   // 코인명
-  var nameLabel = UILabel().then {
+  lazy var nameLabel = UILabel().then {
 //    $0.backgroundColor = .systemRed
     $0.tintColor = .black
   }
   // 현재가
-  let priceLabel = UILabel().then {
+  lazy var priceLabel = UILabel().then {
 //    $0.backgroundColor = .systemYellow
     $0.tintColor = .black
   }
   // 등락률
-  let fluctuation  = UILabel().then {
+  lazy var fluctuation  = UILabel().then {
 //    $0.backgroundColor = .systemGreen
     $0.tintColor = .black
   }
   // 거래대금
-  let transactionAmount  = UILabel().then {
+  lazy var transactionAmount  = UILabel().then {
 //    $0.backgroundColor = .systemTeal
     $0.tintColor = .black
   }
@@ -60,7 +60,7 @@ class CoinCell: UITableViewCell {
       self.contentView.addSubview($0)
       $0.axis = .horizontal
       $0.spacing = 5
-      $0.distribution = .fillEqually
+//      $0.distribution = .fillEqually
       $0.snp.makeConstraints {
         $0.edges.equalTo(contentView)
         $0.height.equalTo(50)
@@ -68,7 +68,19 @@ class CoinCell: UITableViewCell {
       $0.addArrangedSubview(nameLabel)
       $0.addArrangedSubview(priceLabel)
       $0.addArrangedSubview(fluctuation)
-      $0.addArrangedSubview(transactionAmount)
+//      $0.addArrangedSubview(transactionAmount)
+    }
+    
+    nameLabel.snp.makeConstraints {
+      $0.width.equalTo(80)
+    }
+    
+    priceLabel.snp.makeConstraints {
+      $0.width.equalTo(280)
+    }
+    
+    fluctuation.snp.makeConstraints {
+      $0.width.equalTo(100)
     }
   }
   

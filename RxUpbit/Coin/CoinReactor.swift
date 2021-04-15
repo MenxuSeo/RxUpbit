@@ -11,12 +11,13 @@ import RxCocoa
 import RxAlamofire
 
 final class CoinReactor: Reactor {
-  var initialState: State = State(query: "", coins: [], coinTicker: nil)
+  var initialState: State = State(query: "", coins: [], coinTicker: [])
   var disposeBag = DisposeBag()
   
 //  ~Subject는 .completed, .error의 이벤트가 발생하면 subscribe가 종료되는 반면,
 //  ~Relay는 .completed, .error를 발생하지 않고 Dispose되기 전까지 계속 작동하기 때문에 UI Event에서 사용하기 적절합니다.
-  var coinTikcer = PublishRelay<CoinTicker>()
+  private let coinTickerRelay = PublishRelay<CoinTicker>()
+  lazy var coinTickerObservable: Observable<CoinTicker> = coinTickerRelay.asObservable()
   
   // represent user actions
   enum Action {
@@ -27,6 +28,7 @@ final class CoinReactor: Reactor {
   enum Mutation {
     case setQuery(String?)
     case setCoins([Coin])
+    case setCoinTicker(CoinTicker)
   }
   
   // represents the current view state
@@ -35,31 +37,33 @@ final class CoinReactor: Reactor {
     // 모든 프로퍼티의 변경에 state 자체가 통째로 전달됨
     var query: String?
     var coins: [Coin]
-    var coinTicker: CoinTicker?
+    var coinTicker: [CoinTicker]
   }
   
   // View로부터 Action을 받아서 Observable<Mutation>을 생성함
-  func mutate(action: CoinReactor.Action) -> Observable<CoinReactor.Mutation> {
+  func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case let .getData(query):
-//      self.search(networkType: .https)
-      self.ticker()
-      return Observable.concat([
-        Observable.just(Mutation.setQuery(query)),
-      ])
+      search(networkType: .https)
+      return ticker()
+        .map { coinTicker in
+          return .setCoinTicker(coinTicker)
+        }
     default:
       log.verbose("안녕안녕:\(action)")
     }
   }
   
   // 기존 State와 Mutation으로부터 새로운 State를 생성함
-  func reduce(state: CoinReactor.State, mutation: CoinReactor.Mutation) -> CoinReactor.State {
+  func reduce(state: State, mutation: Mutation) -> State {
     var newState = state
     switch mutation {
     case let .setQuery(query):
       newState.query = query
     case let .setCoins(coins):
       newState.coins = coins
+    case let .setCoinTicker(coinTicker):
+      newState.coinTicker = [coinTicker]
     }
     return newState
   }
@@ -89,8 +93,20 @@ final class CoinReactor: Reactor {
     return NetworkManager.request(url: url)
   }
   
-  private func ticker() {//} -> Observable<CoinTicker>{
-    WebSocketManager.instance.connect()
-    return
+  private func ticker() -> Observable<CoinTicker> {
+    let socket = WebSocketManager.instance.connect()
+    socket.onEvent = { [weak self] event in
+      switch event {
+      case .binary(let data):
+        guard let coinTicker = data.toCoinTicker() else { return }
+        guard let `self` = self else { return }
+        
+        self.coinTickerRelay.accept(coinTicker)
+      default: ()
+        log.verbose("event: \(event)")
+      }
+    }
+    
+    return coinTickerObservable
   }
 }

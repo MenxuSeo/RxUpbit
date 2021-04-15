@@ -27,7 +27,8 @@ class NetworkManager {
     return sessionManager
   }()
   
-  class func request(method: HTTPMethod = .get, url: URLConvertible) -> Observable<[Coin]> {    
+  class func request(method: HTTPMethod = .get, url: URLConvertible) -> Observable<[Coin]> {
+    log.verbose("안녕")
     return NetworkManager.instance.rx.data(method, url)
       .retry(2)
       .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
